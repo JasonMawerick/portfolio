@@ -12,10 +12,15 @@ session_start();
 </head>
 <body>
 
-            <form action="add-form-handler.php" method="post">
+            <form action="add-form-handler.php" method="post" enctype="multipart/form-data">
         <div>
             <label for="input_title">Titre</label>
             <input type="text" id="input_title" name="project_title">
+        </div>
+        <div>
+            <label for="input_picture">Image</label>
+            <input type="hidden" name="MAX_FILE_SIZE" value="2097152">  
+            <input type="file" id="input_picture" name="project_picture">
         </div>
         <div>
             <label for="input_begin">Date de démarrage</label>
@@ -49,15 +54,4 @@ session_start();
 
 </body>
 </html>
-© 2021 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
+

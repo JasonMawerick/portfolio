@@ -9,9 +9,10 @@ $query->execute (array('username'=>$_POST['username']));
 $result = $query->fetch();
 
 if(!$result){
-    echo 'l\'identifiant et/ou le Mot de passe sont incorrects';
+    echo 'vous ne passerez pas ';
 }else{
     $verif = password_verify($_POST['password'],$result['password']); 
+    echo $verif;
     if(!$verif){
         echo 'l\'identifiant et/ou le Mot de passe sont incorrects';
     }else{

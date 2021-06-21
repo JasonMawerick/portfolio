@@ -13,7 +13,7 @@ if( isset($_POST['username'])&&!empty($_POST['username'])
         $email=strip_tags($_POST['email']); // strip_tag permet de sécurisé et d'éviter les injections dans le php"
         $password=strip_tags($_POST['password']);
         $confirmation=strip_tags($_POST['confirmation']);
-        $password_encrypt= password_hash ($password, PASSWORD_DEFAULT);
+        $password_encrypt= password_hash($password, PASSWORD_DEFAULT);
         
     //faire requete SQL 
         $sql ="INSERT INTO users(email, username,password) VALUES(:email, :username, :password)";
