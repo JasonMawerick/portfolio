@@ -1,3 +1,11 @@
+<?php
+ require_once('../back/db-connect.php');
+ $sql ='SELECT * FROM `projects`';
+ $query =$db-> prepare($sql);
+ $query->execute();
+ $result = $query->fetchAll(PDO::FETCH_ASSOC);
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -59,35 +67,29 @@
                 <div class="features-extended-inner section-inner">
 					<div class="features-extended-wrap">
 						<div class="container">
+
+						<?php
+							foreach ($result as $project){
+						?>
+
 							<div class="feature-extended">
 								<div class="feature-extended-image">
 									<div class="mockup-bg">
 										<img src="../assets/images/iphone-feature-bg-01.svg" alt="iPhone Feature 01 illustration">
 									</div>
-									<img class="device-mockup is-revealing" src="../assets/images/iphone-feature-01-rp.png" alt="iPhone Feature 01">
+									<img class="device-mockup is-revealing" src="../assets/images/<?=$project['project_picture']?>" alt="iPhone Feature 01">
 								</div>
 								<div class="feature-extended-body is-revealing">
-									<h3 class="mt-0 mb-16">Projet<br> «&nbsp;Le Journal du Web&nbsp;»</h3>
-									<p class="m-0">Réalisation d'un site Web d'information sur les métiers du numérique à destination du grand public, conçu et développé en collaboration avec Paule OMBIONO.</p>
+									<h3 class="mt-0 mb-16"><?=$project['project_title']?></h3>
+									<p class="m-0"><?=$project['project_context']?></p>
                                     <br>
-                                    <a class="button button-primary button-wide-mobile" href="#"><i class="fas fa-link"></i> &nbsp;&nbsp;Fiche Projet</a>
+                                    <a class="button button-primary button-wide-mobile" href="project_details.php?id=<?=$project['id']?>"><i class="fas fa-link"></i> &nbsp;&nbsp;Fiche Projet</a>
 								</div>
 							</div>
-							<div class="feature-extended">
-								<div class="feature-extended-image">
-									<div class="mockup-bg">
-										<img src="../assets/images/iphone-feature-bg-02.svg" alt="iPhone Feature 02 illustration">
-									</div>
-									<img class="device-mockup is-revealing" src="../assets/images/front3-2.png" alt="iphoneblindness">
-								</div>
-								<div class="feature-extended-body is-revealing">
-									<h3 class="mt-0 mb-16">Projet<br> «&nbsp;Blindness&nbsp;»</h3>
-									<p class="m-0">Conception d'un Web de sensibilisation aux problématiques d'accessibilité du web des personnes atteinte de déficience visuelle, contenant des conseils et préconisations à destination des concepteurs et développeurs Web, et appliquant ces mêmes recommandations.</p> 
-                                    <p> Conçu en collaboration avec Sonia ROLLAND, Tiavina RALANDISON & Luc LENEUF, le projet a ensuite été intégré par Paule OMBIONO, Gaël SUDOUR-JEANNIN, Chloé VAUTHIER et Williams CHAZAL.</p>
-                                    <br>
-                                    <a class="button button-primary button-wide-mobile" href="#"><i class="fas fa-link"></i> &nbsp;&nbsp;Fiche Projet</a>
-								</div>
-							</div>
+						<?php
+							}
+						?>
+
 							<div class="feature-extended">
 								<div class="feature-extended-image">
 									<div class="mockup-bg">

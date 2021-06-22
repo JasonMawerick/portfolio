@@ -1,9 +1,7 @@
 <?php
-session_start();
 
-if ($_SESSION['username']) {
     if (isset($_GET['id']) && !empty($_GET['id'])) {
-        require_once('db-connect.php');
+        require_once('../back/db-connect.php');
         $id = strip_tags($_GET['id']);
         $sql = 'SELECT * FROM `projects` WHERE `id`=:id';
         $query = $db->prepare($sql);
@@ -14,9 +12,7 @@ if ($_SESSION['username']) {
     } else {
         echo 'id manquant';
     }
-} else {
-    echo 'identifiez-vous';
-}
+
 
 ?>
 
@@ -34,10 +30,14 @@ if ($_SESSION['username']) {
 
    <h1><?= $result['project_title'] ?></h1> <br><br>
     <img src="../assets/images/<?= $result['project_picture'] ?>" alt=""><br>
-    <?= $result['project_context'] ?><br>
-    <?= $result['project_specs'] ?><br><br>
+    <p><?= $result['project_context'] ?></p><br>
+    <p><?= $result['project_specs'] ?></p>
+    <p>Projet démarré le <?= $result['project_begin'] ?> et terminé le <?= $result['project_end'] ?></p>
+    <br>
+    <br>
+    <br><br>
 
-<a href="home.php"><button>retour</button></a>
+<a href="index.php"><button>retour</button></a>
 
 </body>
 

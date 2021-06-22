@@ -84,6 +84,19 @@ if ($_SESSION['username']) {
                     } else {
                     if (move_uploaded_file($_FILES["project_picture"]["tmp_name"], $target_file)) {
                         echo "The file ". htmlspecialchars( basename( $_FILES["project_picture"]["name"])). " has been uploaded.";
+                        $picture = basename( $_FILES["project_picture"]["name"]) ;
+
+                        $sql = "INSERT INTO projects(project_title, project_picture, project_begin,project_end,project_context,project_specs)VALUES(:project_title, :project_picture, :project_begin,:project_end,:project_context,:project_specs)";
+                        $query = $db->prepare($sql);
+                        $query->bindValue(':project_title', $title, PDO::PARAM_STR);
+                        $query->bindValue(':project_picture', $picture, PDO::PARAM_STR);
+                        $query->bindValue(':project_begin', $begin, PDO::PARAM_STR);
+                        $query->bindValue(':project_end', $end, PDO::PARAM_STR);
+                        $query->bindValue(':project_context', $context, PDO::PARAM_STR);
+                        $query->bindValue(':project_specs', $specs, PDO::PARAM_STR);
+                        $query->execute();
+                        echo 'Datas are saved in database !'; 
+
                         echo'<br><a href="home.php"> Retour </a>';
                     } else {
                         echo "Sorry, there was an error uploading your file.";
